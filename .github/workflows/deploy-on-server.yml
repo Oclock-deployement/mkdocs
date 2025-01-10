@@ -42,7 +42,7 @@
     
       # Job de déploiement de la documentation générée
       deploy:
-        # Le job sera exécuté sur un runner auto-hébergé spécifique appelé "aurelien"
+        # Le job sera exécuté sur un runner auto-hébergé spécifique appelé "vm-oclock"
         runs-on: 
           - vm-oclock  # Spécifie un runner auto-hébergé
         
