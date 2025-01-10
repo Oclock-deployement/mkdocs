@@ -38,8 +38,7 @@ theme:
 
 # Structure de la navigation dans le site
 nav:
-  - Accueil:   # Lien vers la page d'accueil index
-    - Accueil: index
+  - Accueil: /  # Lien vers la page d'accueil index
   - Dossier1:
     - Presentation1: dossier1/presentation1
   - Dossier2:
