@@ -28,3 +28,7 @@ remplacer itdeveloppement-server.eddi.cloud par id du serveur
 
 ### deployement sur github page
 
+- configurer dans .github/workflows le workflow pour deployer le contenu sur une page github page
+- activer la github page sur github / depot / seeting / pages / active github action
+  
+[acceder à la page github page](https://oclock-deployement.github.io/mkdocs/)
