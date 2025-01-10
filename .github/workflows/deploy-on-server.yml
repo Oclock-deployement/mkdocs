@@ -1,0 +1,59 @@
+---
+    # Définition du nom du workflow GitHub Actions
+    name: preprod release
+    
+    # Définition des événements qui déclencheront ce workflow
+    on:
+      # Le workflow peut être déclenché manuellement via l'interface GitHub (workflow_dispatch)
+      workflow_dispatch:
+      
+      # Le workflow peut également être déclenché lors d'un push sur la branche "preprod"
+      push:
+        branches:
+          - main
+    
+    # Définition des jobs (tâches) à exécuter dans ce workflow
+    jobs:
+      # Job de construction de la documentation
+      build:
+        # Le job sera exécuté sur un environnement Ubuntu
+        runs-on: ubuntu-latest
+    
+        # Définition des étapes à exécuter dans ce job
+        steps:
+          # Étape pour récupérer les données du dépôt Git
+          - name: Get data from repository
+            uses: actions/checkout@v4  # Utilise l'action GitHub officielle pour cloner le dépôt
+    
+          # Étape pour construire l'image Docker, en utilisant le Dockerfile et en ciblant l'étape "build"
+          - run: docker build --target build -t mkdocs-builder .
+    
+          # Étape pour exécuter le conteneur Docker qui génère les fichiers statiques de la documentation
+          # Le répertoire "site" sera monté dans le conteneur, pour y placer les fichiers générés
+          - run: docker container run --rm -v ./site:/app/site mkdocs-builder
+    
+          # Étape pour télécharger les fichiers générés en tant qu'artefact pour le déploiement
+          - name: Upload static files as artifact
+            id: deployment
+            uses: actions/upload-artifact@v4  # Utilise l'action officielle GitHub pour uploader des artefacts
+            with:
+              path: site/  # Le chemin vers les fichiers générés à uploader
+              name: notredoc  # Nom de l'artefact qui sera créé
+    
+      # Job de déploiement de la documentation générée
+      deploy:
+        # Le job sera exécuté sur un runner auto-hébergé spécifique appelé "aurelien"
+        runs-on: 
+          - vm-oclock  # Spécifie un runner auto-hébergé
+        
+        # Ce job dépend du job "build" et ne s'exécutera que si le job de construction réussit
+        needs: build
+    
+        # Définition des étapes à exécuter dans ce job
+        steps:
+          # Étape pour télécharger l'artefact généré dans le job "build"
+          - uses: actions/download-artifact@v4  # Utilise l'action officielle GitHub pour télécharger des artefacts
+            with:
+              path: /var/www/html/doctest  # Destination sur le serveur où l'artefact sera téléchargé
+              name: notredoc  # Le nom de l'artefact téléchargé (doit correspondre à celui de l'upload)
+    
