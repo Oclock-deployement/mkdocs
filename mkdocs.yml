@@ -38,7 +38,11 @@ theme:
 
 # Structure de la navigation dans le site
 nav:
-  - Accueil: /  # Lien vers la page d'accueil
+  - Accueil: /  # Lien vers la page d'accueil index
+  - Dossier1:
+    - Presentation1: dossier1/presentation1
+  - Dossier2:
+    - Presentation2: dossier2/presentation2
 
 # Extensions Markdown utilisées pour améliorer la présentation et les fonctionnalités
 markdown_extensions:
