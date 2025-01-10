@@ -1,12 +1,12 @@
 # Informations principales sur le site
-site_name: DevOps Docs                                              # Nom du site affiché en haut des pages
-site_description: Documentations autour de la CI/CD et de Github    # Description courte de la documentation
+site_name: Documentation test                                              # Nom du site affiché en haut des pages
+site_description: Documentations desctiption test    # Description courte de la documentation
 site_url: http://localhost                                          # URL de base du site
-site_author: Aurelien                                               # Auteur de la documentation
+site_author: Marti                                              # Auteur de la documentation
 
 # Informations sur le dépôt GitHub de la documentation
-repo_name: o-devops/doc                                             # Nom du dépôt
-repo_url: https://github.com/o-devops/doc                           # URL du dépôt
+repo_name: Oclock-deployement/mkdocs                                         # Nom du dépôt
+repo_url: https://github.com/Oclock-deployement/mkdocs                          # URL du dépôt
 
 # Configuration du thème
 theme:
