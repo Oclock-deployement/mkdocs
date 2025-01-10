@@ -1,0 +1,36 @@
+{
+    // Ce fichier configure l'environnement de développement pour un projet utilisant MkDocs dans un conteneur Docker.
+    // Il définit les paramètres pour la construction du conteneur Docker, spécifie la commande à exécuter après
+    // le démarrage du conteneur, et personnalise l'environnement VS Code avec des extensions utiles pour l'édition
+    // de fichiers Markdown, Python et YAML.
+
+    // Chemin vers le fichier Dockerfile à utiliser pour construire le conteneur
+    // "../Dockerfile" fait référence à un Dockerfile situé dans le répertoire parent du projet actuel
+    "dockerFile": "../Dockerfile",
+
+    // Spécifie un target dans le Dockerfile à utiliser pendant le processus de construction
+    // Ici, il indique que la construction doit s'arrêter à l'étape "dev" du Dockerfile
+    "build": {
+        "target": "dev"
+    },
+
+    // Commande qui sera exécutée après le démarrage du conteneur
+    // "mkdocs serve" lance le serveur de développement MkDocs pour afficher la documentation localement
+    "postStartCommand": "mkdocs serve",
+
+    // Personnalisation des paramètres de VS Code dans le conteneur
+    // Ici, une extension VS Code est installée pour améliorer l'édition des fichiers YAML
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                // Extensions VS Code à installer automatiquement dans le conteneur
+                // - ms-python.python : prise en charge de Python dans VS Code
+                // - yzhang.markdown-all-in-one : améliore l'édition Markdown
+                // - redhat.vscode-yaml : prise en charge et format yml dan vscode
+                "redhat.vscode-yaml",
+                "ms-python.python",
+                "yzhang.markdown-all-in-one"
+            ]
+        }
+    }
+}

@@ -1,0 +1,24 @@
+# Ce fichier liste les dépendances utilisées dans le projet MkDocs pour générer et personnaliser la documentation.
+# Il comprend des outils pour améliorer le rendu Markdown, ajouter des fonctionnalités comme la coloration syntaxique,
+# intégrer des vidéos et afficher la date de révision des fichiers.
+
+# `mkdocs` : Le framework principal pour la documentation. Il génère des sites Web statiques à partir de fichiers Markdown.
+mkdocs
+
+# `pymdown-extensions` : Un ensemble d'extensions pour améliorer les capacités de rendu de Markdown dans MkDocs, ajoutant des fonctionnalités supplémentaires comme des tableaux de bord améliorés, des diagrammes, et plus.
+pymdown-extensions
+
+# `mdx_truly_sane_lists` : Une extension pour MkDocs qui améliore la gestion des listes Markdown, en corrigeant les comportements de rendu inattendus ou non conformes aux spécifications de Markdown.
+mdx_truly_sane_lists
+
+# `pygments` : Un package Python qui permet de colorier la syntaxe dans le code source, essentiel pour l'affichage du code dans la documentation (lorsqu'il y a des extraits de code).
+pygments
+
+# `mkdocs-material` : Un thème populaire pour MkDocs qui permet de personnaliser l'apparence et la mise en page du site généré avec une interface moderne et propre.
+mkdocs-material
+
+# `mkdocs-video` : Une extension pour intégrer facilement des vidéos dans la documentation générée par MkDocs. Elle permet d'ajouter des vidéos à partir de sources comme YouTube, Vimeo, etc.
+mkdocs-video
+
+# `mkdocs-git-revision-date-localized-plugin` : Un plugin qui permet d'afficher la date de révision d'un fichier dans la documentation générée par MkDocs, avec une prise en charge des formats de date localisés pour plus de flexibilité.
+mkdocs-git-revision-date-localized-plugin
