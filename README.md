@@ -13,8 +13,6 @@
   mkdocs.yml
   dockerfile
 
-
-
 ## 3. workflow : deployer le contenu sur le serveur
 
   # sur un local runner
@@ -22,4 +20,4 @@
   # recuperer les fichiers
   # construire les fichier
   # les mettre dans un artiflac
-  # les deployerb
+  # les deployer
