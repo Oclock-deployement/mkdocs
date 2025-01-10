@@ -1,0 +1,76 @@
+# Nom du workflow
+name: Upload de github pages
+
+# Définition des événements qui déclenchent ce workflow
+on:
+  # Permet de déclencher manuellement via l'interface GitHub Actions
+  workflow_dispatch:
+  
+  # Le workflow est également déclenché sur un push dans la branche "main"
+  push:
+    branches:
+      - main
+
+# Définition des jobs du workflow
+jobs:
+  # Premier job : Construction des fichiers statiques
+  build:
+    # Utilisation d'un environnement Ubuntu pour exécuter ce job
+    runs-on: ubuntu-latest
+
+    # Définition des étapes pour ce job
+    steps:
+      # Étape 1 : Récupérer les données du dépôt GitHub
+      - name: Get data from repository
+        uses: actions/checkout@v4  # Utilise une action GitHub pour cloner le dépôt
+
+      # (Optionnel) Étape pour configurer Python et installer des dépendances
+      # Cela est commenté ici car la configuration Docker est utilisée à la place
+      # - uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.13'
+      #
+      # - run: pip install -r requirements.txt
+      #
+      # - name: Generate static files
+      #   run: mkdocs build
+
+      # Étape 2 : Construire une image Docker contenant les outils nécessaires
+      - run: docker build --target build -t mkdocs-builder .
+
+      # Étape 3 : Exécuter le conteneur Docker pour générer les fichiers statiques
+      # Les fichiers générés seront placés dans le répertoire local "site/"
+      - run: docker container run --rm -v ./site:/app/site mkdocs-builder
+
+      # Étape 4 : Charger les fichiers statiques comme artefacts
+      # Ces artefacts seront utilisés dans le job suivant pour le déploiement
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3  # Utilise une action dédiée pour gérer les artefacts
+        with:
+          path: site/  # Indique le dossier contenant les fichiers générés
+
+  # Deuxième job : Déploiement sur GitHub Pages
+  deploy:
+    # Ce job dépend du succès du job précédent ("build")
+    needs: build
+
+    # Définition des permissions nécessaires pour publier sur GitHub Pages
+    permissions:
+      pages: write       # Autorisation pour écrire sur GitHub Pages
+      id-token: write    # Autorisation pour vérifier l'origine du déploiement
+
+    # Configuration de l'environnement de déploiement
+    environment:
+      name: github-pages  # Nom de l'environnement
+      url: ${{ steps.deployment.outputs.page_url }}  # URL générée automatiquement
+
+    # Utilisation d'un environnement Ubuntu pour exécuter ce job
+    runs-on: ubuntu-latest
+
+    # Définition des étapes pour ce job
+    steps:
+      # Étape 1 : Déployer les artefacts sur GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4  # Utilise une action dédiée pour déployer sur Pages
