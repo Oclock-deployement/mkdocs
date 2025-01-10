@@ -1,0 +1,78 @@
+# Informations principales sur le site
+site_name: Documentation test                                              # Nom du site affiché en haut des pages
+site_description: Documentations desctiption test    # Description courte de la documentation
+site_url: http://localhost                                          # URL de base du site
+site_author: Marti                                              # Auteur de la documentation
+
+# Informations sur le dépôt GitHub de la documentation
+repo_name: Oclock-deployement/mkdocs                                         # Nom du dépôt
+repo_url: https://github.com/Oclock-deployement/mkdocs                          # URL du dépôt
+
+# Configuration du thème
+theme:
+  name: material  # Utilisation du thème Material pour MkDocs
+  palette:
+    # Palette de couleurs pour le mode clair
+    - media: "(prefers-color-scheme: light)"
+      scheme: default                                               # Schéma de couleurs par défaut pour le mode clair
+      toggle:
+        icon: material/brightness-7                                 # Icône pour changer le mode
+        name: Switch to dark mode                                   # Texte du bouton pour activer le mode sombre
+
+    # Palette de couleurs pour le mode sombre
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate                                                 # Schéma de couleurs pour le mode sombre
+      toggle:
+        icon: material/brightness-4                                 # Icône pour changer le mode
+        name: Switch to light mode                                  # Texte du bouton pour activer le mode clair
+
+  language: 'fr'                                                    # Langue du site (ici, le français)
+  font:
+    text: 'Fira Sans'                                               # Police de caractères pour le texte principal
+    code: 'Fira Mono'                                               # Police pour le code
+  features:
+    - navigation.instant                                            # Navigation instantanée
+    - navigation.tabs                                               # Onglets de navigation
+    - navigation.tabs.sticky                                        # Onglets de navigation collants (ils restent en haut lors du défilement)
+    - toc.integrate                                                 # Table des matières intégrée
+
+# Structure de la navigation dans le site
+nav:
+  - Accueil: /  # Lien vers la page d'accueil
+
+# Extensions Markdown utilisées pour améliorer la présentation et les fonctionnalités
+markdown_extensions:
+  #- mdx_truly_sane_lists  # Correction de la gestion des listes imbriquées dans Markdown
+  #- pymdownx.tabbed  # Permet de créer des onglets avec le Markdown
+  - admonition                                                      # Ajoute des boîtes de types d'avertissements dans le contenu
+  - pymdownx.details                                                # Permet de créer des sections repliables
+  - pymdownx.superfences                                            # Permet d'ajouter des blocs de code plus riches
+  - pymdownx.critic                                                 # Extension pour gérer les révisions de texte
+  - pymdownx.magiclink                                              # Permet de créer des liens magiques dans le texte
+  - pymdownx.smartsymbols                                           # Améliore la gestion des symboles dans le Markdown
+  #- footnotes  # Permet d'ajouter des notes de bas de page
+  - toc:
+      permalink: true                                               # Active un permalien pour la table des matières
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg  # Utilisation d'un générateur SVG pour les emojis
+  - pymdownx.tilde                                                  # Permet l'utilisation de la tilde pour le texte barré
+  - pymdownx.tasklist:
+      custom_checkbox: true                                         # Permet de personnaliser les cases à cocher
+      clickable_checkbox: true                                      # Permet de rendre les cases à cocher cliquables
+
+# Plugins utilisés pour étendre les fonctionnalités de MkDocs
+plugins:
+  - tags                                                            # Permet d'ajouter des tags à la documentation
+  - search:
+      prebuild_index: false                                         # Désactive la préconstruction de l'index pour la recherche
+  - git-revision-date-localized:
+      enable_creation_date: true                                    # Affiche la date de création des fichiers
+
+# Fichiers CSS supplémentaires à inclure pour personnaliser le style du site
+extra_css:
+  - _assets/stylesheets/extra.css                                   # Fichier CSS personnalisé pour modifier l'apparence
+
+# Fichiers JavaScript supplémentaires pour ajouter des fonctionnalités spécifiques
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js  # Librairie pour trier les tableaux
+  - _assets/javascript/tables.js                                    # Fichier JavaScript personnalisé pour la gestion des tableaux
