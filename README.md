@@ -32,3 +32,4 @@ remplacer itdeveloppement-server.eddi.cloud par id du serveur
 - activer la github page sur github / depot / seeting / pages / active github action
   
 [acceder à la page github page](https://oclock-deployement.github.io/mkdocs/)
+
